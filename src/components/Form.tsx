@@ -1,12 +1,12 @@
-"use client";
-
 type FormProps = {
+  action: (payload: FormData) => void;
   children: React.ReactNode;
-  action: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 };
 
-//! Add the correct type for action
-
-export default function Form({ children, action }: FormProps) {
-  return <form action={action}>{children}</form>;
+export default function Form({ action, children }: FormProps) {
+  return (
+    <form className="sm:mx-auto sm:w-full sm:max-w-sm" action={action}>
+      {children}
+    </form>
+  );
 }

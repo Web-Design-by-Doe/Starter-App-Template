@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import localfont from "next/font/local";
 import { Inter } from "next/font/google";
+
 import { ThemeProvider, Nav } from "@/components";
 
 import "./globals.css";
@@ -10,6 +12,13 @@ export const metadata: Metadata = {
   title: "NextJs TailwindCSS Starter",
   description: "Description of the site",
 };
+
+//! Add your custom fonts here
+// const customFont = localfont({
+//   src: "/fonts/Inter-Regular.ttf",
+//   display: "swap",
+//   variable: "--font-san",
+// });
 
 export default function RootLayout({
   children,
