@@ -4,9 +4,9 @@ import { Client, Account } from "node-appwrite";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const ENDPOINT = process.env.NEXT_PUBLIC_APPWRITE_API_ENDPOINT!;
-const PROJECT_ID = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!;
-const API_KEY = process.env.NEXT_PUBLIC_APPWRITE_API_KEY!;
+const ENDPOINT = process.env.APPWRITE_API_ENDPOINT!;
+const PROJECT_ID = process.env.APPWRITE_PROJECT_ID!;
+const API_KEY = process.env.APPWRITE_API_KEY!;
 
 export async function createSessionClient() {
   const client = new Client().setEndpoint(ENDPOINT).setProject(PROJECT_ID);

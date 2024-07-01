@@ -5,12 +5,7 @@ import { Button } from "./ui/button";
 
 export default function LogoutButton() {
   return (
-    <Button
-      onClick={() => logoutUser()}
-      type="button"
-      variant="destructive"
-      size="lg"
-    >
+    <Button onClick={() => logoutUser()} type="button" variant="destructive">
       Logout
     </Button>
   );

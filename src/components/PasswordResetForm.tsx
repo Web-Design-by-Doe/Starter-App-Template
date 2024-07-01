@@ -7,13 +7,12 @@ import { Form, Input } from "@/components";
 import { Button } from "./ui/button";
 import { passwordResetFormState } from "@/utils/initialFormStates";
 
-export default function PasswordResetForm({
-  userId,
-  secret,
-}: {
+type Props = {
   userId: string;
   secret: string;
-}) {
+};
+
+export default function PasswordResetForm({ userId, secret }: Props) {
   const initialState = {
     ...passwordResetFormState,
     userId,

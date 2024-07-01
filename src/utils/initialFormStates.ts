@@ -22,9 +22,14 @@ const passwordResetFormState = {
   secret: "",
 };
 
+const updateUserNameFormState = {
+  name: "",
+};
+
 export {
   loginFormState,
   registerFormState,
   passwordResetRequestFormState,
   passwordResetFormState,
+  updateUserNameFormState,
 };
