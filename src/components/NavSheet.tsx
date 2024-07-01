@@ -16,6 +16,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { getLoggedInUser } from "@/app/_actions";
 import LogoutButton from "./LogoutButton";
+import AccountSheet from "./AccountSheet";
 
 export const navigationLinks = [
   {
@@ -37,16 +38,16 @@ export const navigationLinks = [
 ];
 
 export async function NavSheet() {
-  const isAuthenticated = await getLoggedInUser();
+  const account = await getLoggedInUser();
   return (
     <header className="fixed w-full top-0 flex h-16 items-center gap-4 bg-background px-4 md:px-6">
       <nav className="hidden w-full flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm ">
         {navigationLinks.map((link) => {
-          if (link.href === "/dashboard" && !isAuthenticated) {
+          if (link.href === "/dashboard" && !account) {
             return null;
           }
           if (
-            isAuthenticated &&
+            account &&
             (link.href === "/login" || link.href === "/register")
           ) {
             return null;
@@ -90,28 +91,7 @@ export async function NavSheet() {
         </SheetContent>
       </Sheet>
 
-      {isAuthenticated && (
-        <div className="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <LogoutButton />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      )}
+      {account && <AccountSheet account={account} />}
     </header>
   );
 }

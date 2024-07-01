@@ -11,6 +11,7 @@ import {
   RegisterSchema,
   ResetPasswordRequestSchema,
   ResetPasswordSchema,
+  UpdateUserNameSchema,
 } from "@/utils/validationSchemas";
 import { createAdminClient, createSessionClient } from "@/utils/appwrite";
 
@@ -144,7 +145,10 @@ export async function sendPasswordResetEmail(state: any, formData: FormData) {
     const { email } = result.data;
     const restRequestPromise = await account.createRecovery(email, redirectUrl);
   } catch (error) {
-    console.log(error);
+    return {
+      ...state,
+      error: { ...state.error },
+    };
   }
 }
 
@@ -170,7 +174,36 @@ export async function passwordReset(state: any, formData: FormData) {
       password
     );
   } catch (error) {
-    return error;
+    return {
+      ...state,
+      error: { ...state.error },
+    };
+  } finally {
+    redirect("http://localhost:3000/account");
+  }
+}
+
+export async function updateUserName(state: any, formData: FormData) {
+  const { account } = await createAdminClient();
+
+  try {
+    const result = UpdateUserNameSchema.safeParse({
+      name: formData.get("name"),
+    });
+
+    if (result.error) {
+      throw { error: result.error.format() };
+    }
+
+    const { name } = result.data;
+    const updatePromise = await account.updateName(name);
+
+    return { ...state, name };
+  } catch (error) {
+    return {
+      ...state,
+      error: { ...state.error },
+    };
   } finally {
     redirect("http://localhost:3000/account");
   }

@@ -17,18 +17,20 @@ export default function RegisterForm() {
 
   return (
     <Form action={formAction}>
-      <Input
-        type="text"
-        name="first_name"
-        placeholder="First Name"
-        error={state?.error?.first_name?._errors[0]}
-      />
-      <Input
-        type="text"
-        name="last_name"
-        placeholder="Last Name"
-        error={state?.error?.last_name?._errors[0]}
-      />
+      <div className="flex gap-2 w-full">
+        <Input
+          type="text"
+          name="first_name"
+          placeholder="First Name"
+          error={state?.error?.first_name?._errors[0]}
+        />
+        <Input
+          type="text"
+          name="last_name"
+          placeholder="Last Name"
+          error={state?.error?.last_name?._errors[0]}
+        />
+      </div>
       <Input
         type="email"
         name="email"
@@ -45,7 +47,7 @@ export default function RegisterForm() {
         type="password"
         name="confirm_password"
         placeholder="Confirm Password"
-        error={state?.error?.confirm_password?._errors[0]}
+        error={state?.error?._errors[0]}
       />
       <Button type="submit" size="lg">
         Register
